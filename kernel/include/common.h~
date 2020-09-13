@@ -1,0 +1,30 @@
+#ifndef COMMON_H
+#define COMMON_H
+
+#include <stdbool.h>
+
+/* at least 8-bit */
+typedef signed char        int8_t;
+typedef unsigned char      uint8_t;
+
+/* at least 16-bit */
+typedef short              int16_t;
+typedef unsigned short     uint16_t;
+
+/* at least 32-bit */
+typedef long               int32_t;
+typedef unsigned long      uint32_t;
+
+/* at least 64-bit */
+typedef long long          int64_t;
+typedef unsigned long long uint64_t;
+
+
+
+/* functions */
+
+void change_color(int new_color);
+void puts(const char *string);
+char *itoa(int value, char *str, int base);
+
+#endif

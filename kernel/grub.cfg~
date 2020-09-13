@@ -1,0 +1,3 @@
+menuentry "NULL" {
+	multiboot /boot/popcorn.elf
+}

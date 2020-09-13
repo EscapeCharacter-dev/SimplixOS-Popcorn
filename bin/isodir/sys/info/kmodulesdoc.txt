@@ -1,0 +1,136 @@
+~~~~~~=== Popcorn Kernel Modules ===~~~~~~
+
+--------------------- 1. Structure ---------------------
+    A kmodule is simply an normal ELF executable file.
+But, it doesn't contain any main functions, and compiles
+as a file that uses only kernel files.
+--------------------------------------------------------
+--------------------- 2. Functions ---------------------
+    Because a kmodule doesn't contain any main function,
+It insteads focuses on some functions that serves as
+entrypoints, which the kernel will call to talk to a
+specific piece of hardware for example. There is a
+simple list of all functions that MUST be present in
+ANY kmodule, unless it will cause a kernel panic.
+  ~ #DEFINE kmodfunc 2   This's used for critical
+			 kmodule function calls.
+  ~ #DEFINE kmodfunco 3  
+			 This's used for optionnal
+			 kmodules function calls.
+
+	- void kmodfunc KMOD_ATTACH():
+	  This function is called when the kernel
+	Attaches this kmodule to it's driver list.
+	This can be used to execute some simple code.
+
+	- int kmodfunc KMOD_CALL(int call):
+	  This function can be used to link simple
+	functions and execute code. Documentation
+	for specific driver purposes is explained
+	in the file '/etc/kmod/drivers.txt'.
+
+	- void kmodfunc KMOD_DETACH():
+	  This function is called when the kernel
+	detaches the following module. It serves
+	to execute some cleaning code, or just
+	code that needs to get executed at the end
+	of the driver's execution.
+
+	- int kmodfunc KMOD_GETRES(char *resname):
+	  This function is called when the kernel
+	wants to access specefic resources like
+	some simple text file to display. You
+	can return 0 if the resource doesn't exist.
+	The kernel may panic depending on the
+	necessity of the file.
+
+	- int kmodfunc KMOD_MSG(int message, int dat):
+	  This function is called when a
+	kmodule is talking to your kmodule. This
+	can be used to talk between kmodules if they
+	are really large and are splitted between
+	two parts.
+
+	- int kmodfunc KMOD_CAMO():
+	  This function gets called whenever the kernel
+	or a kmodule applies KMOD_CAMO on the kmodule.
+
+	- int kmodfunc KMOD_ENABLED(int value):
+	  This function can be used to call functions
+	whenever a specific value is enabled.
+
+	- int kmodfunc KMOD_DISABLED(int value):
+	  This function can be used to call functions
+	whenever a specific value is disabled.
+
+	- int kmodfunc KMOD_PINGED():
+	  This function is called whenever the kernel
+	or a kmodule is pinging you.
+
+--------------------------------------------------------
+--------------------- 3. API Calls ---------------------
+    Of course, there is available functions that you can
+use to talk to other kmodules, Popcorn and use out & in
+functions. You will need to include the file
+'/sys/krnl/include/kmodule.h' and
+'/sys/krnl/include/asmutils.h'. They will give you
+access to a lot of ring 0 functions and more. This
+section is about kmodule.h and details each function's
+purpose.
+
+	- int KMOD_TALK(int kmod, int message,
+			int dat):
+	  This function can be used to send messages
+	to others kmodules. The result can be any value,
+	but there are some reserved values that stands
+	for errors.
+	0 = Kmodule not existing or not responding.
+	-1 = The specific kmodule doesn't know this call.
+	-2 = Kernel refuses talking, the driver may be
+	running in ring 1 (system level)
+
+	- int KRNL_TALK(int message, int data):
+	  This function can be used to talk to the
+	kernel. If it returns -1, the call failed
+	or doesn't exist.
+
+	- int KMOD_CAMO(int kmod):
+	  Tries to enable Camo for a specific
+	kmodule. Camo is a specific mode where the
+	kmodule interacts with the user space.
+
+	- int KMOD_DCAMO(int kmod):
+	  Tries to disable Camo for a specific
+	kmodule.
+
+	- int KMOD_ENABLE(int kmod, int entry):
+	  Tries to enable a specific entry of
+	the kmodule. Camo can be activated with
+	KMOD_ENABLE(kmod, KMOD_CAMO);
+
+	- int KMOD_DISABLE(int kmod, int entry):
+	  Tries to disable a specific entry of the
+	kmodule.
+
+	- int KMOD_SETKEY(int kmod, int entry,
+			  int data):
+	  This function can be used to enable
+	an entry of the specific kmodule.
+
+	- void KMOD_QUIT(int status):
+	  This function can be used to exit
+	manually.
+
+	- int KMOD_PING(int kmod):
+	  This function can be used to test
+	if a kmodule is alive.
+
+	- int KMOD_THIS():
+	  Returns the ID of this kmodule,
+	can be used to enable Camo on itself
+	in a weird way.
+
+
+
+
+

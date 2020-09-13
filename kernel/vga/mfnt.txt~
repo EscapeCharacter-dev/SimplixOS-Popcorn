@@ -1,0 +1,39 @@
+MFNT Image structure:
+{0, 3}   MFNT		Magic Number (1)
+{4, 7}   *$$$		Magic Number (2)
+{8, 11}  [uint32_t]	Width of the image
+{12, 15} [uint32_t]	Height of the image
+{16, 19} [uint32_t]	End of the image (in the file)
+{20, 23} [uint32_t]	Rune (32-bit character representation)
+{24, 25} [uint16_t]	Unicode Rune (16-bit character)
+{26}	 [uint8_t]	Character (UTF-8 character (8-bit))
+{27}	 [uint8_t]	Header Align (should be 0)
+{28, 31} [uint32_t]	Header end (ignored)
+{32, ...}[uint8_t[3]*]	Pixels (24-bit)
+MFNT Bottom structure:
+{0, 3}   [uint32_t]	Anti-aliasing tolerance (old school printers, terminals)
+{4, 7}	 [uint32_t]	Rescalling factor (old school printers, terminals)
+{8, 11}  [uint32_t]	Contrast factor (old school printers, terminals)
+{12, 15} [uint32_t]	Brightness factor (old school printers, terminals)
+{16, 19} [uint32_t]	Outline size (requires extensive calculations if not 0)
+{20, 23} [uint8_t[3]]	Ignore color
+{24, 31} [uint64_t]	Bottom Align (should be 0)
+
+MFNTX Font structure:
+{0, 3}	 MFNT		Magic Number (1)
+{4, 7}   X$$$		Magic Number (2)
+{8, 11}  [uint32_t]	Image count
+{12, 15} [uint32_t]	Width of the images
+{16, 19} [uint32_t]	Height of the images
+{20, 23} [uint32_t]	Font magic (1)
+{24, 27} [uint32_t]	Font magic (2)
+{28, 31} [uint32_t]	Image size
+{32, ...}??????????	Images
+MFNTX Image structure:
+{0, 3}	 IMGS		Image start
+{4, 7}	 [uint32_t]	Rune (32-bit character representation)
+{8, 9}	 [uint16_t]	Unicode Rune (16-bit character)
+{10}	 [uint8_t]	Character (UTF-* character (8-bit))
+{11, ...}[uint8_t[3]*]	Pixels (24-bit)
+MFNTX Bottom structure:
+(MFNT bottom structure)
