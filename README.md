@@ -15,3 +15,8 @@ The software is provided as it is, without any guarantee of any kind. The softwa
 proprietary / closed source, meaning that it would be illegal to modify and redistribute.
 # Hacking
 To hack into SimplixOS or Popcorn, it's pretty simple. The file "kernel/krnlcore/kernel.c" contains the entrypoint of the Popcorn kernel.
+# How to build
+To build SimplixOS, the script is located at "/kernel/build.sh". On Windows/WSL, you can use the "kernel/buildrun.sh" or "run.sh" to run with QEMU.
+Linux support is not yet built-in (script wise) but you can still run with QEMU using 'qemu-system-x86_64 SimplixOS.iso' command to execute.
+For now, VirtualBox seems to be the most efficient emulator.
+NOTE: SimplixOS & Popcorn both build with GRUB2. If you want another bootloader, you'll need to hack in. Shouldn't be too difficult.
