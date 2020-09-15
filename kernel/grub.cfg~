@@ -1,3 +1,5 @@
-menuentry "NULL" {
+GRUB_GFXMODE=1024x768x32
+
+menuentry "SimplixOS ~ Popcorn" {
 	multiboot /boot/popcorn.elf
 }

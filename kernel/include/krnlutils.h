@@ -13,6 +13,14 @@ uint16_t ins(uint16_t port);
 uint32_t inl(uint16_t port);
 int inw(uint16_t port);
 
+int eax();
+int ebx();
+int ecx();
+int edx();
+int esp();
+int eip();
+int cs();
+
 void nop();
 
 #endif

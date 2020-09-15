@@ -1,4 +1,21 @@
+#include "../include/common.h"
+#include "../mm/tinyalloc.h"
+#include "../kdrivers/ata/ata.h"
+#include "../include/libc/stdio.h"
+#include "../kdrivers/fs/isocd.h"
+
+#include "../real/v8086.h"
+
 void kernel_ep(void)
 {
-    return;
+    init_vga(GREY, BLACK);
+
+    enter_v86(1, esp(), cs(), eip());
+
+    while(1)
+    {
+        char c = getInput();
+
+        printkch(c);
+    }
 }

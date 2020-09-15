@@ -183,7 +183,7 @@ void printkch(char ch)
   else
     vga_buffer[vga_index] = vga_entry(ch, g_fore_color, g_back_color);
 
-  if (vga_index == 80 * 55)
+  if (vga_index == BUFSIZE)
     terminal_scroll();
 
   vga_index++;
