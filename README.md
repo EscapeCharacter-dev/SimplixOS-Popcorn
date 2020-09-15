@@ -7,7 +7,7 @@ Popcorn is an Unix-like kernel, it powers the SimplixOS operating system. It doe
 # External sources
 https://osdev.org/ was an useful website to help develop the kernel, as well as https://codeproject.com/
 # Liscence
-I am (EscapeCharacter) a supporter for the free software mouvement. So almost all of my code is published under some kind of Free software liscence, 
+I (EscapeCharacter) am a supporter for the free software mouvement. So almost all of my code is published under some kind of Free software liscence, 
 mostly GPL3. Both SimplixOS and Popcorn are completly open-source and free software. Both follow the "free speech" and "free beer", but if you want 
 your new SimplixOS distribution can cost money or be private source. I have no problem with that. You own the software or machine, so you should be
 able to modify it as you want, right?
