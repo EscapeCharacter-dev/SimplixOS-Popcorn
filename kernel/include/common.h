@@ -5,6 +5,10 @@
 #include <stddef.h>
 #include "libc/cdefs.h"
 
+int ______KPANIC______;
+
+#define ______KPANIC_UNKNOWN_ARCH 0xFFFFFFFF
+
 /* at least 8-bit */
 typedef signed char        int8_t;
 typedef unsigned char      uint8_t;
@@ -20,6 +24,21 @@ typedef unsigned long      uint32_t;
 /* at least 64-bit */
 typedef long long          int64_t;
 typedef unsigned long long uint64_t;
+
+/* Custom modifier */
+#define interrupt __attribute__((interrupt))
+
+#if defined __i386__        // 32-bit
+typedef long               word;
+typedef unsigned long      uword;
+#elif defined __x86_64__    // 64-bit
+typedef long long          word;
+typedef unsigned long long uword;
+#else                       // OK WHAT IS GOING ON?!!!
+typedef signed char        word;
+typedef unsigned char      uword;
+______KPANIC______ = ______KPANIC_UNKNOWN_ARCH;
+#endif
 
 #define ERRNO_EOVERFLOW   -2
 #define ERRNO_NOTLEGALINT -3

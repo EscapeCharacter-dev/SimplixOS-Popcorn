@@ -27,7 +27,7 @@ dd 32 ; bpp
 
 [GLOBAL start]
 [GLOBAL glb_mboot_ptr]
-[EXTERN kern_ep]
+[EXTERN kernel_ep]
 
 start:
     cli
@@ -38,7 +38,7 @@ start:
     mov [glb_mboot_ptr] , ebx
 
     push ebx
-    call kern_ep
+    call kernel_ep
 
 stop:
     hlt
